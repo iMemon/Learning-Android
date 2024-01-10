@@ -104,15 +104,13 @@ fun CalculateYearlyTax2021_22(value: Int): Int  {
   return (monthlyTax * 12).toInt()
 }
 
+/// https://www.glxspace.com/2022/06/30/income-tax-rates-2022-23-for-salaried-persons-employees-with-slabs/
 fun CalculateYearlyTax2022_23(value: Int): Int  {
   var salary:Double = value.toDouble()
   var monthlyTax:Double = 0.0
-  val taxSlabs = arrayOf<Double>(100_000.0, 100_000.0, 100_000.0, 200_000.0, 500_000.0)
-  var taxRates = arrayOf<Double>(0.0, 0.07, 0.125, 0.175, 0.225, 0.325)
-  if (salary > 50_000 && salary <= 100_000) {
-    monthlyTax = 100.0/12
-
-  } else if (salary > 100_000 && salary <= 10_00_000) {
+  val taxSlabs = arrayOf<Double>(50_000.0, 50_000.0, 100_000.0, 100_000.0, 200_000.0, 500_000.0)
+  var taxRates = arrayOf<Double>(0.0, 0.025, 0.125, 0.2, 0.25, 0.325, 0.35)
+  if (salary > 50_000.0 && salary <= 10_00_000) {
     var index = 0
     do {
       val taxAddition = when(salary >= taxSlabs[index]) {
@@ -125,7 +123,7 @@ fun CalculateYearlyTax2022_23(value: Int): Int  {
     } while (salary > 0)
 
   } else if(salary > 10_00_000) {
-    monthlyTax = 167_000 + (salary-10_00_000)*0.325
+    monthlyTax = 591_000 + (salary-10_00_000)*0.35
   }
   return (monthlyTax * 12).toInt()
 }
